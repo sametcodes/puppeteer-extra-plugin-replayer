@@ -1,0 +1,23 @@
+{
+  "name": "puppeteer-extra-plugin-replayer",
+  "version": "1.0.0",
+  "description": "Modify & replay caught requests by intercepting network activity within puppeteer scripts.",
+  "main": "index.js",
+  "repository": "https://github.com/sametcodes/puppeteer-extra-plugin-replayer.git",
+  "author": "Samet <selmansamet@pm.me>",
+  "license": "ISC",
+  "keywords": [
+    "puppeteer",
+    "intercept",
+    "request",
+    "replay",
+    "modify"
+  ],
+  "dependencies": {
+    "puppeteer-extra-plugin": "^3.2.2"
+  },
+  "devDependencies": {
+    "puppeteer": "^15.5.0",
+    "puppeteer-extra": "^3.3.4"
+  }
+}
