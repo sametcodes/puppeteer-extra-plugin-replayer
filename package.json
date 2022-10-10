@@ -4,7 +4,7 @@
   "description": "Modify & replay caught requests by intercepting network activity within puppeteer scripts.",
   "main": "index.js",
   "repository": "https://github.com/sametcodes/puppeteer-extra-plugin-replayer.git",
-  "author": "Samet <selmansamet@pm.me>",
+  "author": "Samet <hey@samet.codes>",
   "license": "ISC",
   "keywords": [
     "puppeteer",
