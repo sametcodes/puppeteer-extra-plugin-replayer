@@ -1,7 +1,7 @@
 import { HTTPRequest, HTTPResponse, Page } from "puppeteer";
 const { PuppeteerExtraPlugin } = require('puppeteer-extra-plugin')
 
-interface RequestParameter {
+interface RequestParameter extends RequestInit {
     url?: string | ((arg0: string) => string);
     method?: string;
     headers?: any | ((arg0: any) => any);
