@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { PuppeteerExtraPlugin } = require('puppeteer-extra-plugin');
-;
 class RequestReplayer extends PuppeteerExtraPlugin {
-    constructor(opts = {}) {
-        super(opts);
+    constructor() {
+        super(...arguments);
+        this._isPuppeteerExtraPlugin = true;
         this.isFunction = (value) => (Object.prototype.toString.call(value) === "[object Function]" || "function" === typeof value || value instanceof Function);
     }
     get name() {
@@ -38,7 +38,6 @@ class RequestReplayer extends PuppeteerExtraPlugin {
         return { _url, _headers, _method, _body };
     }
     async catchRequest(replayer, trigger, page = this.page) {
-        // call trigger function if it's been defined
         await this.page.setRequestInterception(true);
         if (this.isFunction(trigger))
             trigger();
@@ -95,10 +94,7 @@ class RequestReplayer extends PuppeteerExtraPlugin {
                 return request.continue();
             });
         });
-        return Promise.any([
-            cdpRequestCatcher,
-            xhrRequestCatcher
-        ]);
+        return Promise.any([cdpRequestCatcher, xhrRequestCatcher]);
     }
     replayRequest({ url, headers, method, body, ...options }, page = this.page) {
         return page.evaluate((url, headers, method, body, options) => {
@@ -121,6 +117,4 @@ class RequestReplayer extends PuppeteerExtraPlugin {
         this.page = page;
     }
 }
-module.exports = function (pluginConfig) {
-    return new RequestReplayer(pluginConfig);
-};
+exports.default = () => new RequestReplayer();
