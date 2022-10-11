@@ -1,5 +1,6 @@
 import { HTTPRequest, HTTPResponse, Page } from "puppeteer";
 const { PuppeteerExtraPlugin } = require('puppeteer-extra-plugin')
+var any = require('promise.any');
 
 interface RequestParameter extends RequestInit {
     url?: string | ((arg0: string) => string);
@@ -8,23 +9,25 @@ interface RequestParameter extends RequestInit {
     body?: any | ((arg0: any) => any);
 }
 
-interface Replayer{
+interface Replayer {
     pattern: RegExp | string;
 }
 
 declare module 'puppeteer' {
-    interface Page{
+    interface Page {
         catchRequest: (replayer: Replayer, trigger: () => void) => Promise<HTTPRequest>;
     }
 }
 declare module 'puppeteer' {
-    interface HTTPRequest{
+    interface HTTPRequest {
         replay: (params?: RequestParameter) => Promise<HTTPResponse>;
     }
 }
 
 class RequestReplayer extends PuppeteerExtraPlugin {
-    _isPuppeteerExtraPlugin = true;
+    get _isPuppeteerExtraPlugin() {
+        return true
+    }
 
     get name() {
         return 'request-replayer'
@@ -120,7 +123,7 @@ class RequestReplayer extends PuppeteerExtraPlugin {
             })
         })
 
-        return Promise.any([ cdpRequestCatcher, xhrRequestCatcher ]);
+        return any([cdpRequestCatcher, xhrRequestCatcher]);
     }
     replayRequest({ url, headers, method, body, ...options }: RequestParameter, page = this.page): HTTPResponse {
         return page.evaluate((url: any, headers: any, method: any, body: any, options: any) => {
@@ -131,7 +134,7 @@ class RequestReplayer extends PuppeteerExtraPlugin {
                 "method": method,
                 ...options
             }).then(res => {
-                if(res?.headers?.get('Content-Type')?.includes("application/json")){
+                if (res?.headers?.get('Content-Type')?.includes("application/json")) {
                     return res.json()
                 }
                 return res.text()
@@ -144,4 +147,5 @@ class RequestReplayer extends PuppeteerExtraPlugin {
     }
 }
 
-export default () => new RequestReplayer();
+const defaultExport = () => new RequestReplayer();
+module.exports = defaultExport;

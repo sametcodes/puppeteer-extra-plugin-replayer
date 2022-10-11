@@ -13,18 +13,18 @@
     "replay",
     "modify"
   ],
-  "dependencies": {
-    "puppeteer-extra-plugin": "^3.2.2"
-  },
   "devDependencies": {
-    "@types/puppeteer": "^5.4.6",
-    "puppeteer": "^15.5.0",
-    "puppeteer-extra": "^3.3.4",
     "rimraf": "^3.0.2",
     "tsc": "^2.0.4",
     "typescript": "^4.8.4"
   },
+  "dependencies": {
+    "puppeteer": "^15.5.0",
+    "puppeteer-extra": "^3.3.4",
+    "promise.any": "^2.0.4",
+    "puppeteer-extra-plugin": "^3.2.2"
+  },
   "scripts": {
-    "build": "rimraf ./build && tsc"
+    "build": "rimraf ./dist && tsc"
   }
 }
