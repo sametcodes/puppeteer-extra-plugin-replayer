@@ -1,4 +1,4 @@
-# puppeteer-extra-plugin-replayer
+## puppeteer-extra-plugin-replayer
 
 Replay and modify caught requests by intercepting network activity within puppeteer scripts.
 
@@ -11,7 +11,7 @@ This package is prepared for:
 
 ### Installation
 
-```
+```npm
 npm install puppeteer-extra-plugin-replayer
 ```
 
@@ -54,10 +54,10 @@ In the second scenario, the interaction function that triggers the wanted reques
 
 ## API
 
-### `page.catchRequest(PatternObject, triggerFunction)`
+#### `page.catchRequest(PatternObject, triggerFunction)`
 
-The plugin provides a function as `.catchRequest(object, fn)`, which can be used to catch ongoing requests. The function returns an extended version of `HTTPRequest`, which includes `.replay()` method.
+The plugin provides a function as `.catchRequest(PatternObject, triggerFunction)`, which can be used to catch ongoing requests. The function returns an extended version of [`HTTPRequest`](https://learn.microsoft.com/en-us/javascript/api/@aspnet/signalr/httprequest?view=signalr-js-latest) object, which includes `.replay()` method.
 
-### `request.replay(RequestInit?)`
+#### `request.replay(RequestInit?)`
 
-The `.replay()` method takes an optional argument as an extended version of `RequestInit` object that includes functionated version of strign parameters such `url`, `method` and `headers`, and `body`.
+The `.replay()` method takes an optional argument as an extended version of [`RequestInit`](https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.requestinit.html) object that includes functionated version of strign parameters such `url`, `method` and `headers`, and `body`.
