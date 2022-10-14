@@ -131,3 +131,4 @@ class RequestReplayer extends PuppeteerExtraPlugin {
 }
 const defaultExport = () => new RequestReplayer();
 module.exports = defaultExport;
+//# sourceMappingURL=index.js.map
