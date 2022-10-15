@@ -2,6 +2,8 @@
 
 Replay and modify caught requests by intercepting network activity within puppeteer scripts.
 
+<img width="600" alt="Screen Shot 2022-10-15 at 10 13 12 AM" src="https://user-images.githubusercontent.com/9467273/195974289-68ebdb69-f7dc-44c4-a747-3b33f3da645e.png">
+
 This package is prepared for:
 
 - QA Engineers
