@@ -52,6 +52,26 @@ In the second scenario, the interaction function that triggers the wanted reques
 })();
 ```
 
+It's possible to modify requests. [See more](#requestreplayrequestinit).
+
+```javascript
+const response = await request.replay({
+	url: "https://twitter.com/logout", // defining a new URL is possible
+	method: "POST", // changing the request method is possible as well
+ 	body: JSON.stringify({test: true}),
+	headers: {test: true},
+});
+
+// or define callback functions to read default values
+
+const response = await request.replay({
+	url: url => url.replace(/login/, "/logout"),
+	method: "POST", // changing the request method is possible as well
+ 	body: body => body + ";test=true",
+	headers: headers => {...headers, test: true}
+});
+```
+
 You can see original and replayed requests on the network tab in CDP.
 
 <img width="675" alt="Screen Shot 2022-10-11 at 9 40 24 AM" src="https://user-images.githubusercontent.com/9467273/195022533-cc08c0c6-b9e1-45de-8289-8278edc132bf.png">
